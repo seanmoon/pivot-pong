@@ -59,6 +59,10 @@ body td {
   width: 200px;
 }
 
+body form {
+  margin-top: 10px;
+}
+
 body input[type='text'] {
   font-size: 24px;
   display: block;

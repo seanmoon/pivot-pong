@@ -13,6 +13,8 @@
       %td= m.loser
       %td.action= link_to "delete", match_path(m), method: :delete
 
+%h2 Add a match
+
 = form_for(@match) do |f|
   = f.label :winner
   = f.text_field :winner
@@ -23,4 +25,4 @@
   = submit_tag "Add match"
 
 %nav
-  = link_to "Rankings", rankings_matches_path
+  = link_to "Rankings", "/"
