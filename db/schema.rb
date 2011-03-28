@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110325082358) do
+ActiveRecord::Schema.define(:version => 20110328015925) do
 
   create_table "matches", :force => true do |t|
     t.string   "winner"
     t.string   "loser"
-    t.date     "date"
+    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

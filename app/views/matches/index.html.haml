@@ -8,7 +8,7 @@
     %th.action
   - @matches.each do |m|
     %tr{class: cycle("even", "odd")}
-      %td.date= m.date.to_s
+      %td.date= m.date.strftime("%Y-%m-%d")
       %td= m.winner
       %td= m.loser
       %td.action= link_to "delete", match_path(m), method: :delete
@@ -19,7 +19,7 @@
   = f.label :loser
   = f.text_field :loser
   = f.label :date
-  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d")
+  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
   = submit_tag "Add match"
 
 %nav
