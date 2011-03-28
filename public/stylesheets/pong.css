@@ -101,3 +101,7 @@ td.action, th.action {
   background-color: #E7E7E7;
 }
 
+a.source {
+  font-size: 12px;
+  float: right;
+}
