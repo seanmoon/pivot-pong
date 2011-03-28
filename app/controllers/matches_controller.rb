@@ -17,18 +17,8 @@ class MatchesController < ApplicationController
     @matches = Match.order("date")
   end
 
-  def new
-    @match = Match.new
-  end
-
   def rankings
     matches = Match.order("date")
     @rankings = calculate_rankings(matches)
-  end
-
-  def update
-    match = Match.find_by_id(params[:id])
-    match.update_attributes(params[:match])
-    redirect_to matches_path
   end
 end

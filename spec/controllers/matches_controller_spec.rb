@@ -26,23 +26,6 @@ describe MatchesController do
     end
   end
 
-  describe "PUT #update" do
-    let(:match) { Match.create(winner: "gd", loser: "top") }
-    let(:valid_params) { { winner: "top", loser: "gd" } }
-    before do
-      put :update, id: match.to_param, match: valid_params
-      match.reload
-    end
-
-    it { should redirect_to(matches_path) }
-
-    describe "match" do
-      subject { match }
-      its(:winner) { should == "top" }
-      its(:loser)  { should == "gd" }
-    end
-  end
-
   describe "DELETE #destroy" do
     let!(:match) { Match.create(winner: "gd", loser: "top") }
 
