@@ -1,0 +1,23 @@
+%h2 Match history
+
+%table
+  %tr
+    %th.date Date
+    %th Winner
+    %th Loser
+  - @matches.each do |m|
+    %tr{class: cycle("even", "odd")}
+      %td.date= m.date.to_s
+      %td= m.winner
+      %td= m.loser
+
+= form_for(@match) do |f|
+  = f.label :winner
+  = f.text_field :winner
+  = f.label :loser
+  = f.text_field :loser
+  = f.label :date
+  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d")
+  = submit_tag "Add match"
+
+= link_to "Rankings", rankings_matches_path

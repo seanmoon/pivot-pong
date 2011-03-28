@@ -1,0 +1,86 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body h1 {
+  font-size: 36px;
+  margin: 10px 0;
+}
+
+body a {
+  display: block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: blue;
+}
+
+body ol {
+  font-size: 48px;
+  margin: 20px auto;
+  width: 550px;
+}
+
+body li {
+  padding: 5px 25px;
+  width: 500px;
+  list-style-position: inside;
+}
+
+body li, body td {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+body table {
+  table-layout: fixed;
+  margin: 10px 0px;
+  width: 550px;
+}
+
+body th, body td {
+  padding: 2px 5px;
+}
+
+body th {
+  background-color: #333;
+  color: white;
+}
+
+body td {
+  width: 225px;
+}
+
+body input[type='text'] {
+  font-size: 24px;
+  display: block;
+  width: 100%;
+}
+
+td.date, th.date {
+  width: 100px;
+  text-align: center
+}
+
+#page {
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
+  width: 600px;
+}
+
+#content {
+  padding: 25px;
+  background-color: #DEDEDE;
+}
+
+.even {
+  background-color: #F0F0F0;
+}
+
+.odd {
+  background-color: #E7E7E7;
+}
+
+
