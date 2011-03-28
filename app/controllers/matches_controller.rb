@@ -7,6 +7,11 @@ class MatchesController < ApplicationController
     redirect_to matches_path
   end
 
+  def destroy
+    Match.find(params[:id]).destroy
+    redirect_to matches_path
+  end
+
   def index
     @match = Match.new
     @matches = Match.order("date")

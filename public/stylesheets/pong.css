@@ -8,10 +8,13 @@ body h1 {
 }
 
 body a {
-  display: block;
-  margin-top: 20px;
   text-decoration: none;
   color: blue;
+}
+
+nav a {
+  display: block;
+  margin-top: 20px;
 }
 
 body ol {
@@ -27,7 +30,7 @@ body li {
 }
 
 body li, body td {
-  overflow-x: hidden;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -38,8 +41,13 @@ body table {
   width: 550px;
 }
 
+body tr {
+  height: 20px;
+}
+
 body th, body td {
   padding: 2px 5px;
+  vertical-align: middle;
 }
 
 body th {
@@ -48,7 +56,7 @@ body th {
 }
 
 body td {
-  width: 225px;
+  width: 200px;
 }
 
 body input[type='text'] {
@@ -59,7 +67,13 @@ body input[type='text'] {
 
 td.date, th.date {
   width: 100px;
-  text-align: center
+  text-align: center;
+}
+
+td.action, th.action {
+  font-size: 12px;
+  width: 50px;
+  text-align: center;
 }
 
 #page {
@@ -82,5 +96,4 @@ td.date, th.date {
 .odd {
   background-color: #E7E7E7;
 }
-
 

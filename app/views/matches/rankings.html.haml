@@ -4,4 +4,5 @@
   - @rankings.each do |player|
     %li{class: cycle("even", "odd")}= player
 
-= link_to "Match history", matches_path
+%nav
+  = link_to "Match history", matches_path
