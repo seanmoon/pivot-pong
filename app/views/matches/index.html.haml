@@ -1,3 +1,14 @@
+%h2 Add a match
+
+= form_for(@match) do |f|
+  = f.label :winner
+  = f.text_field :winner
+  = f.label :loser
+  = f.text_field :loser
+  = f.label :date
+  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
+  = submit_tag "Add match"
+
 %h2 Match history
 
 %table
@@ -13,16 +24,6 @@
       %td= m.loser
       %td.action= link_to "delete", match_path(m), method: :delete
 
-%h2 Add a match
-
-= form_for(@match) do |f|
-  = f.label :winner
-  = f.text_field :winner
-  = f.label :loser
-  = f.text_field :loser
-  = f.label :date
-  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
-  = submit_tag "Add match"
 
 %nav
   = link_to "Rankings", "/"

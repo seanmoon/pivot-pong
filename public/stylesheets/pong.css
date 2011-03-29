@@ -60,7 +60,7 @@ body td {
 }
 
 body form {
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 body input[type='text'] {

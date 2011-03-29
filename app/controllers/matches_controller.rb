@@ -16,7 +16,7 @@ class MatchesController < ApplicationController
 
   def index
     @match = Match.new
-    @matches = Match.order("date")
+    @matches = Match.order("date desc")
   end
 
   def rankings

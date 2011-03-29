@@ -9,7 +9,7 @@ describe MatchesController do
     let!(:older_match) { Match.create(winner: "you", loser: "me", date: date - 1.day) }
     before { get :index }
     it { should be_success }
-    it { assigns(:matches).should == Match.order("date") }
+    it { assigns(:matches).should == Match.order("date desc") }
     it { assigns(:match).should be }
   end
 
