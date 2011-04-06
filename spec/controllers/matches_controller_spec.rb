@@ -4,12 +4,12 @@ describe MatchesController do
   subject { response }
 
   describe "GET #index" do
-    let(:date) { Time.now }
-    let!(:newer_match) { Match.create(winner: "me", loser: "you", date: date) }
-    let!(:older_match) { Match.create(winner: "you", loser: "me", date: date - 1.day) }
+    let(:occured_at) { Time.now }
+    let!(:newer_match) { Match.create(winner: "me", loser: "you", occured_at: occured_at) }
+    let!(:older_match) { Match.create(winner: "you", loser: "me", occured_at: occured_at - 1.day) }
     before { get :index }
     it { should be_success }
-    it { assigns(:matches).should == Match.order("date desc") }
+    it { assigns(:matches).should == Match.order("occured_at desc") }
     it { assigns(:match).should be }
   end
 
@@ -40,9 +40,9 @@ describe MatchesController do
   end
 
   describe "GET #rankings" do
-    let(:date) { Time.now }
-    let!(:newer_match) { Match.create(winner: "me", loser: "you", date: date) }
-    let!(:older_match) { Match.create(winner: "you", loser: "me", date: date - 1.day) }
+    let(:occured_at) { Time.now }
+    let!(:newer_match) { Match.create(winner: "me", loser: "you", occured_at: occured_at) }
+    let!(:older_match) { Match.create(winner: "you", loser: "me", occured_at: occured_at - 1.day) }
     before { get :rankings }
     it { should be_success }
     it { assigns(:rankings).should == ["me", "you"] }

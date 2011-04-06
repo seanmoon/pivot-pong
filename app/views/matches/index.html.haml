@@ -5,8 +5,8 @@
   = f.text_field :winner
   = f.label :loser
   = f.text_field :loser
-  = f.label :date
-  = f.text_field :date, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
+  = f.label :occured_at
+  = f.text_field :occured_at, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
   = submit_tag "Add match"
 
 %h2 Match history
@@ -19,7 +19,7 @@
     %th.action
   - @matches.each do |m|
     %tr{class: cycle("even", "odd")}
-      %td.date= m.date.strftime("%Y-%m-%d")
+      %td.date= m.occured_at.strftime("%Y-%m-%d")
       %td= m.winner
       %td= m.loser
       %td.action= link_to "delete", match_path(m), method: :delete

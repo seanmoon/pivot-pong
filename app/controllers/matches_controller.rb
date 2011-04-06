@@ -16,11 +16,11 @@ class MatchesController < ApplicationController
 
   def index
     @match = Match.new
-    @matches = Match.order("date desc")
+    @matches = Match.order("occured_at desc")
   end
 
   def rankings
-    matches = Match.order("date")
+    matches = Match.order("occured_at asc")
     @rankings = calculate_rankings(matches)
   end
 end
