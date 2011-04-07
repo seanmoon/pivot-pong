@@ -30,7 +30,6 @@ body li {
 }
 
 body li, body td {
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -53,10 +52,11 @@ body th, body td {
 body th {
   background-color: #333;
   color: white;
+  overflow: hidden;
 }
 
 body td {
-  width: 200px;
+  width: 205px;
 }
 
 body form {
@@ -70,7 +70,9 @@ body input[type='text'] {
 }
 
 td.date, th.date {
-  width: 100px;
+  overflow: hidden;
+  text-overflow: clip;
+  width: 90px;
   text-align: center;
 }
 

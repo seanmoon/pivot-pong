@@ -19,7 +19,7 @@
     %th.action
   - @matches.each do |m|
     %tr{class: cycle("even", "odd")}
-      %td.date= m.occured_at.strftime("%Y-%m-%d")
+      %td.date= m.occured_at
       %td= m.winner
       %td= m.loser
       %td.action= link_to "delete", match_path(m), method: :delete
