@@ -56,7 +56,7 @@ body th {
 }
 
 body td {
-  width: 205px;
+  width: 200px;
 }
 
 body form {
@@ -70,9 +70,7 @@ body input[type='text'] {
 }
 
 td.date, th.date {
-  overflow: hidden;
-  text-overflow: clip;
-  width: 90px;
+  width: 100px;
   text-align: center;
 }
 
