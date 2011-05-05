@@ -5,9 +5,9 @@
 
 = form_for(@match) do |f|
   = f.label :winner
-  = f.text_field :winner
+  = f.text_field :winner, autocomplete: "off"
   = f.label :loser
-  = f.text_field :loser
+  = f.text_field :loser, autocomplete: "off"
   = f.label :occured_at
   = f.text_field :occured_at, value: Time.now.strftime("%Y-%m-%d %H:%M:%S")
   = submit_tag "Add match"

@@ -23,4 +23,14 @@ class MatchesController < ApplicationController
     matches = Match.order("occured_at asc")
     @rankings = calculate_rankings(matches)
   end
+
+  def players
+    if params[:q]
+      names = Match.where(["winner LIKE ?", params[:q] + '%']).collect(&:winner) + Match.where(["loser LIKE ?", params[:q] + '%']).collect(&:loser)
+    else
+      names = Match.all.collect {|m| [m.winner, m.loser]}.flatten
+    end
+
+    render text: names.collect(&:downcase).sort.uniq.collect(&:titleize).join("\n")
+  end
 end

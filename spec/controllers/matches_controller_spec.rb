@@ -47,4 +47,23 @@ describe MatchesController do
     it { should be_success }
     it { assigns(:rankings).should == ["Me", "You"] }
   end
+
+  describe "GET #players" do
+    before do
+      @match1 = Match.create(winner: "danny burkes", loser: "edward hieatt")
+      @match2 = Match.create(winner: "davis frank", loser: "parker thompson")
+    end
+
+    it "renders a sorted, titleized list of player names" do
+      get :players
+      response.should be_success
+      response.body.should == ["Danny Burkes", "Davis Frank", "Edward Hieatt", "Parker Thompson"].join("\n")
+    end
+
+    it "takes a query parameter" do
+      get :players, q: "d"
+      response.should be_success
+      response.body.should == ["Danny Burkes", "Davis Frank"].join("\n")
+    end
+  end
 end
