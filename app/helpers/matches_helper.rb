@@ -19,6 +19,6 @@ module MatchesHelper
       end
     end
 
-    ranking
+    ranking.collect(&:titleize)
   end
 end

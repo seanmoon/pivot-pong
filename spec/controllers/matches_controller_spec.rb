@@ -45,6 +45,6 @@ describe MatchesController do
     let!(:older_match) { Match.create(winner: "you", loser: "me", occured_at: occured_at - 1.day) }
     before { get :rankings }
     it { should be_success }
-    it { assigns(:rankings).should == ["me", "you"] }
+    it { assigns(:rankings).should == ["Me", "You"] }
   end
 end

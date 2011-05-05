@@ -11,7 +11,7 @@ describe MatchesHelper do
 
     context "one match passed in" do
       let(:matches) { [Match.create(winner: "me", loser: "you")] }
-      it { should == ["me", "you"] }
+      it { should == ["Me", "You"] }
     end
 
     context "multiple matches" do
@@ -21,7 +21,7 @@ describe MatchesHelper do
           Match.create(winner: "p2", loser: "p1")
         ]
       end
-      it { should == ["p2", "p1"] }
+      it { should == ["P2", "P1"] }
     end
 
     context "moving halfway to the loser" do
@@ -32,11 +32,16 @@ describe MatchesHelper do
           Match.create(winner: "p4", loser: "p1")
         ]
       end
-      it { should == ["p1", "p4", "p2", "p3"] }
+      it { should == ["P1", "P4", "P2", "P3"] }
     end
     
     it "uses case-insensitive comparisons" do
-      helper.calculate_rankings([Match.create(winner: "p1", loser: "P2"), Match.create(winner: "P1", loser: "p2")]).should == ["p1", "p2"]
+      helper.calculate_rankings([Match.create(winner: "p1", loser: "P2"), Match.create(winner: "P1", loser: "p2")]).should == ["P1", "P2"]
+    end
+    
+    it "titleizes the rankings" do
+      helper.calculate_rankings([Match.create(winner: "joe blow", loser: "jane doe"), Match.create(winner: "joe blow", loser: "spot")]).should == 
+        ["Joe Blow", "Jane Doe", "Spot"]
     end
   end
 end
