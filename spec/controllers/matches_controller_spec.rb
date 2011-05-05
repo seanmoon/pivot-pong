@@ -65,5 +65,11 @@ describe MatchesController do
       response.should be_success
       response.body.should == ["Danny Burkes", "Davis Frank"].join("\n")
     end
+
+    it "applies the query parameter case-insensitively" do
+      get :players, q: "D"
+      response.should be_success
+      response.body.should == ["Danny Burkes", "Davis Frank"].join("\n")
+    end
   end
 end

@@ -26,7 +26,8 @@ class MatchesController < ApplicationController
 
   def players
     if params[:q]
-      names = Match.where(["winner LIKE ?", params[:q] + '%']).collect(&:winner) + Match.where(["loser LIKE ?", params[:q] + '%']).collect(&:loser)
+      query = params[:q].downcase + '%'
+      names = Match.where(["LOWER(winner) LIKE ?", query]).collect(&:winner) + Match.where(["LOWER(loser) LIKE ?", query]).collect(&:loser)
     else
       names = Match.all.collect {|m| [m.winner, m.loser]}.flatten
     end
