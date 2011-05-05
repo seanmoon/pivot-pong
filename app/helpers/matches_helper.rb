@@ -3,8 +3,8 @@ module MatchesHelper
     ranking = []
 
     matches.each do |match|
-      winner = match.winner
-      loser  = match.loser
+      winner = match.winner.downcase
+      loser  = match.loser.downcase
 
       ranking << winner unless ranking.include? winner
       ranking << loser  unless ranking.include? loser
