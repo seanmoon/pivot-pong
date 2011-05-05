@@ -1,5 +1,8 @@
 %h2 Add a match
 
+%nav
+  = link_to "Rankings", root_path
+
 = form_for(@match) do |f|
   = f.label :winner
   = f.text_field :winner
@@ -26,4 +29,4 @@
 
 
 %nav
-  = link_to "Rankings", "/"
+  = link_to "Rankings", root_path
