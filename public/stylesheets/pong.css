@@ -105,3 +105,15 @@ a.source {
   font-size: 12px;
   float: right;
 }
+
+.flash {
+  margin-bottom: 10px;
+}
+
+.flash .alert {
+  color: red;
+}
+
+.flash .notice {
+  color: green;
+}

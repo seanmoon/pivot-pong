@@ -13,5 +13,6 @@
     #page
       #content
         %h1== pivot pong #{location.downcase}
+        = render 'shared/flash_messages'
         = yield
         = link_to "source code", "https://github.com/ssamoon/pivot-pong", class: "source"

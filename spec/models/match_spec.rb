@@ -7,4 +7,9 @@ describe Match do
     before { Time.stub(:now).and_return(occured_at) }
     its(:occured_at) { should == occured_at }
   end
+
+  describe "validations" do
+    subject { Match.create }
+    it { should_not be_valid }
+  end
 end
