@@ -36,4 +36,22 @@ describe Player do
     subject { Player.ranked }
     it { should == [you, me] }
   end
+
+  describe "#most_recent_match" do
+    let!(:player) { Player.create(name: "me") }
+    subject { player.most_recent_match }
+    let!(:opponent) { Player.create(name: "you") }
+    let!(:m1) { Match.create(winner: player, loser: opponent) }
+    it { should == m1 }
+
+    context "multiple matches" do
+      let!(:m2) { Match.create(winner: opponent, loser: player) }
+      it { should == m2 }
+
+      context "with retro-actively created matches" do
+        let!(:m3) { Match.create(winner: player, loser: opponent, occured_at: 1.day.ago) }
+        it { should == m2 }
+      end
+    end
+  end
 end

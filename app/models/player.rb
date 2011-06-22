@@ -14,6 +14,10 @@ class Player < ActiveRecord::Base
     name.titleize
   end
 
+  def most_recent_match
+    Match.where(['winner_id = ? OR loser_id = ?', id, id]).order('occured_at desc').first
+  end
+
   private
 
   def downcase_name
