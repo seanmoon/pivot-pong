@@ -28,8 +28,7 @@ class MatchesController < ApplicationController
   end
 
   def rankings
-    matches = Match.order("occured_at asc")
-    @rankings = calculate_rankings(matches)
+    @rankings = Player.ranked
   end
 
   def players

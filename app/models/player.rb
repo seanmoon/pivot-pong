@@ -6,6 +6,9 @@ class Player < ActiveRecord::Base
 
   validates :name, presence: true
   validates_uniqueness_of :name
+  validates_uniqueness_of :rank, :allow_nil => true
+
+  scope :ranked, where('rank IS NOT NULL').order('rank asc')
 
   def display_name
     name.titleize

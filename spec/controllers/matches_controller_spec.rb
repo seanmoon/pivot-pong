@@ -5,8 +5,8 @@ describe MatchesController do
 
   describe "GET #index" do
     let(:occured_at) { Time.now }
-    let(:me) { Player.create(name: "me" ) }
-    let(:you) { Player.create(name: "you" ) }
+    let(:me) { Player.create(name: "me", rank: 1 ) }
+    let(:you) { Player.create(name: "you", rank: 2 ) }
     let!(:newer_match) { Match.create(winner: me, loser: you, occured_at: occured_at) }
     let!(:older_match) { Match.create(winner: you, loser: me, occured_at: occured_at - 1.day) }
     before { get :index }
@@ -58,20 +58,18 @@ describe MatchesController do
   end
 
   describe "GET #rankings" do
-    let(:occured_at) { Time.now }
-    let(:me) { Player.create(name: "me" ) }
-    let(:you) { Player.create(name: "you" ) }
-    let!(:newer_match) { Match.create(winner: me, loser: you, occured_at: occured_at) }
-    let!(:older_match) { Match.create(winner: you, loser: me, occured_at: occured_at - 1.day) }
+    let!(:me) { Player.create(name: "me", rank: 1) }
+    let!(:you) { Player.create(name: "you", rank: 2) }
+    let!(:us) { Player.create(name: "us", rank: nil) }
     before { get :rankings }
     it { should be_success }
-    it { assigns(:rankings).should == ["Me", "You"] }
+    it { assigns(:rankings).should == [me, you] }
   end
 
   describe "GET #players" do
     before do
-      @match1 = Match.create(winner: Player.create(name: "danny burkes"), loser: Player.create(name: "edward hieatt"))
-      @match2 = Match.create(winner: Player.create(name: "davis frank"), loser: Player.create(name: "parker thompson"))
+      @match1 = Match.create(winner: Player.create(name: "danny burkes", rank: 1), loser: Player.create(name: "edward hieatt", rank: 2))
+      @match2 = Match.create(winner: Player.create(name: "davis frank", rank: 3), loser: Player.create(name: "parker thompson", rank: 4))
     end
 
     it "renders a sorted, titleized list of player names" do
