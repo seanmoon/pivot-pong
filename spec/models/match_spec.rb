@@ -28,10 +28,10 @@ describe Match do
       establishing_match1.winner.should == p1
       establishing_match1.loser.should == p4
 
-      p1.reload.should_not be_inactive
-      p2.reload.should_not be_inactive
-      p3.reload.should_not be_inactive
-      p4.reload.should_not be_inactive
+      p1.reload.should be_active
+      p2.reload.should be_active
+      p3.reload.should be_active
+      p4.reload.should be_active
       p5.reload.should be_inactive
 
       p1.rank.should == 1
@@ -117,18 +117,18 @@ describe Match do
 
     it "should mark players as inactive who haven't played a game in the last 30 days" do
       Player.update_all :inactive => false
-      p4.should_not be_inactive
+      p4.should be_active
       Match.create(winner: p2, loser: p3)
-      p1.reload.should_not be_inactive
-      p2.reload.should_not be_inactive
-      p3.reload.should_not be_inactive
+      p1.reload.should be_active
+      p2.reload.should be_active
+      p3.reload.should be_active
       p4.reload.should be_inactive
     end
 
     it "should mark players as inactive who have never played a game" do
       Player.update_all :inactive => false
       new_player = Player.create(name: "no matches")
-      new_player.should_not be_inactive
+      new_player.should be_active
       Match.create(winner: p2, loser: p3)
       new_player.reload.should be_inactive
     end

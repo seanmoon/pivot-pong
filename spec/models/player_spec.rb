@@ -26,7 +26,7 @@ describe Player do
 
   it "clears ranks when players become inactive" do
     p1 = Player.create(name: "foo", rank: 3, inactive: false)
-    p1.should_not be_inactive
+    p1.should be_active
     p1.rank.should == 3
     p1.update_attributes :inactive => true
     p1.reload.should be_inactive
