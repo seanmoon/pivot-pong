@@ -24,6 +24,15 @@ describe Player do
     Player.new.should_not be_valid
   end
 
+  it "clears ranks when players become inactive" do
+    p1 = Player.create(name: "foo", rank: 3, inactive: false)
+    p1.should_not be_inactive
+    p1.rank.should == 3
+    p1.update_attributes :inactive => true
+    p1.reload.should be_inactive
+    p1.rank.should be_nil
+  end
+
   describe '#display_name' do
     subject { Player.create(name: 'scooby doo') }
     its(:display_name) { should == 'Scooby Doo' }
@@ -35,6 +44,17 @@ describe Player do
     let!(:us) { Player.create(name: "us", rank: nil) }
     subject { Player.ranked }
     it { should == [you, me] }
+  end
+
+  describe ".active and .inactive" do
+    let!(:me) { Player.create(name: "me", rank: nil, inactive: false) }
+    let!(:you) { Player.create(name: "you", rank: 1, inactive: false) }
+    let!(:us) { Player.create(name: "us", rank: 2, inactive: true) }
+
+    it "should scope players correctly" do
+      Player.active.should == [me, you]
+      Player.inactive.should == [us]
+    end
   end
 
   describe "#most_recent_match" do

@@ -9,6 +9,7 @@ class Match < ActiveRecord::Base
   before_validation :set_default_occured_at_date, on: :create
 
   after_save :update_player_ranks
+  after_save :mark_inactive_players
 
   private
 
@@ -18,8 +19,8 @@ class Match < ActiveRecord::Base
 
   def update_player_ranks
     if Player.sum(:rank) == 0
-      winner.update_attributes :rank => 1
-      loser.update_attributes :rank => 2
+      winner.update_attributes :rank => 1, :inactive => false
+      loser.update_attributes :rank => 2, :inactive => false
       return
     elsif loser.rank.nil?
       return
@@ -32,7 +33,16 @@ class Match < ActiveRecord::Base
       Player.where(['rank < ? AND rank >= ?', winner_rank, new_rank]).order('rank desc').each do |player|
         player.update_attributes :rank => player.rank + 1
       end
-      winner.update_attributes :rank => new_rank
+      winner.update_attributes :rank => new_rank, :inactive => false
+    end
+  end
+
+  def mark_inactive_players
+    cutoff = 30.days.ago
+    Player.active.each do |player|
+      if player.most_recent_match.nil? || (player.most_recent_match.occured_at < cutoff)
+        player.update_attributes :inactive => true
+      end
     end
   end
 end

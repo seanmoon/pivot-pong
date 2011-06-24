@@ -14,11 +14,32 @@ describe Match do
   end
 
   describe "updating player ranks" do
-    let!(:p1) { Player.create(name: "p1", rank: 1)}
-    let!(:p2) { Player.create(name: "p2", rank: 2)}
-    let!(:p3) { Player.create(name: "p3", rank: 3)}
-    let!(:p4) { Player.create(name: "p4", rank: 4)}
-    let!(:p5) { Player.create(name: "p5", rank: nil)}
+    let!(:p1) { Player.create(name: "p1") }
+    let!(:p2) { Player.create(name: "p2") }
+    let!(:p3) { Player.create(name: "p3") }
+    let!(:p4) { Player.create(name: "p4") }
+    let!(:p5) { Player.create(name: "p5", rank: nil) }
+    let!(:establishing_match1) { Match.create(winner: p1.reload, loser: p4.reload) }
+    let!(:establishing_match2) { Match.create(winner: p3.reload, loser: p4.reload) }
+    let!(:establishing_match3) { Match.create(winner: p2.reload, loser: p1.reload) }
+
+    before do
+      Match.order(:id).should == [establishing_match1, establishing_match2, establishing_match3]
+      establishing_match1.winner.should == p1
+      establishing_match1.loser.should == p4
+
+      p1.reload.should_not be_inactive
+      p2.reload.should_not be_inactive
+      p3.reload.should_not be_inactive
+      p4.reload.should_not be_inactive
+      p5.reload.should be_inactive
+
+      p1.rank.should == 1
+      p2.rank.should == 2
+      p3.rank.should == 3
+      p4.rank.should == 4
+      p5.rank.should be_nil
+    end
 
     context "when the players are next to each other" do
       it "should update those players ranks" do
@@ -41,6 +62,7 @@ describe Match do
 
     context "moving halfway to the loser" do
       it "should update intermediary players correctly" do
+        Player.update_all :inactive => false
         Match.create(winner: p4, loser: p1)
 
         p1.reload.rank.should == 1
@@ -52,6 +74,7 @@ describe Match do
 
     context "when the winner doesn't have a rank yet" do
       it "assigns the correct ranks" do
+        Player.update_all :inactive => false
         Match.create(winner: p5, loser: p2)
 
         p2.reload.rank.should == 2
@@ -81,6 +104,48 @@ describe Match do
         p4.reload.rank.should == 4
         p5.reload.rank.should be_nil
       end
+    end
+  end
+
+  describe "marking players inactive" do
+    let!(:p1) { Player.create(name: "foo") }
+    let!(:p2) { Player.create(name: "bar") }
+    let!(:p3) { Player.create(name: "baz") }
+    let!(:p4) { Player.create(name: "quux") }
+    let!(:m1) { Match.create(winner: p4, loser: p2, occured_at: 31.days.ago) }
+    let!(:m2) { Match.create(winner: p1, loser: p3, occured_at: 15.days.ago) }
+
+    it "should mark players as inactive who haven't played a game in the last 30 days" do
+      Player.update_all :inactive => false
+      p4.should_not be_inactive
+      Match.create(winner: p2, loser: p3)
+      p1.reload.should_not be_inactive
+      p2.reload.should_not be_inactive
+      p3.reload.should_not be_inactive
+      p4.reload.should be_inactive
+    end
+
+    it "should mark players as inactive who have never played a game" do
+      Player.update_all :inactive => false
+      new_player = Player.create(name: "no matches")
+      new_player.should_not be_inactive
+      Match.create(winner: p2, loser: p3)
+      new_player.reload.should be_inactive
+    end
+  end
+
+  describe "reactivating players" do
+    let!(:p1) { Player.create(name: "foo", rank: nil, inactive: true) }
+    let!(:p2) { Player.create(name: "bar", rank: 1, inactive: false) }
+
+    it "should reactivate inactive players when they win a match" do
+      Match.create(winner: p1, loser: p2)
+      p1.reload.should be_active
+    end
+
+    it "should not reactivate inactive players when the lose a match" do
+      Match.create(winner: p2, loser: p1)
+      p1.reload.should be_inactive
     end
   end
 end

@@ -28,7 +28,7 @@ class MatchesController < ApplicationController
   end
 
   def rankings
-    @rankings = Player.ranked
+    @rankings = Player.active.ranked
   end
 
   def players
