@@ -25,10 +25,10 @@ describe Player do
   end
 
   it "clears ranks when players become inactive" do
-    p1 = Player.create(name: "foo", rank: 3, inactive: false)
+    p1 = Player.create(name: "foo", rank: 3, active: true)
     p1.should be_active
     p1.rank.should == 3
-    p1.update_attributes :inactive => true
+    p1.update_attributes :active => false
     p1.reload.should be_inactive
     p1.rank.should be_nil
   end
@@ -47,9 +47,9 @@ describe Player do
   end
 
   describe ".active and .inactive" do
-    let!(:me) { Player.create(name: "me", rank: nil, inactive: false) }
-    let!(:you) { Player.create(name: "you", rank: 1, inactive: false) }
-    let!(:us) { Player.create(name: "us", rank: 2, inactive: true) }
+    let!(:me) { Player.create(name: "me", rank: nil, active: true) }
+    let!(:you) { Player.create(name: "you", rank: 1, active: true) }
+    let!(:us) { Player.create(name: "us", rank: 2, active: false) }
 
     it "should scope players correctly" do
       Player.active.should == [me, you]

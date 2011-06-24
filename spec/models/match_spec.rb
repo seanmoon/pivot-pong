@@ -62,7 +62,7 @@ describe Match do
 
     context "moving halfway to the loser" do
       it "should update intermediary players correctly" do
-        Player.update_all :inactive => false
+        Player.update_all :active => true
         Match.create(winner: p4, loser: p1)
 
         p1.reload.rank.should == 1
@@ -74,7 +74,7 @@ describe Match do
 
     context "when the winner doesn't have a rank yet" do
       it "assigns the correct ranks" do
-        Player.update_all :inactive => false
+        Player.update_all :active => true
         Match.create(winner: p5, loser: p2)
 
         p2.reload.rank.should == 2
@@ -116,7 +116,7 @@ describe Match do
     let!(:m2) { Match.create(winner: p1, loser: p3, occured_at: 15.days.ago) }
 
     it "should mark players as inactive who haven't played a game in the last 30 days" do
-      Player.update_all :inactive => false
+      Player.update_all :active => true
       p4.should be_active
       Match.create(winner: p2, loser: p3)
       p1.reload.should be_active
@@ -126,7 +126,7 @@ describe Match do
     end
 
     it "should mark players as inactive who have never played a game" do
-      Player.update_all :inactive => false
+      Player.update_all :active => true
       new_player = Player.create(name: "no matches")
       new_player.should be_active
       Match.create(winner: p2, loser: p3)
@@ -135,8 +135,8 @@ describe Match do
   end
 
   describe "reactivating players" do
-    let!(:p1) { Player.create(name: "foo", rank: nil, inactive: true) }
-    let!(:p2) { Player.create(name: "bar", rank: 1, inactive: false) }
+    let!(:p1) { Player.create(name: "foo", rank: nil, active: false) }
+    let!(:p2) { Player.create(name: "bar", rank: 1, active: true) }
 
     it "should reactivate inactive players when they win a match" do
       Match.create(winner: p1, loser: p2)

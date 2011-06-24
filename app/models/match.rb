@@ -19,8 +19,8 @@ class Match < ActiveRecord::Base
 
   def update_player_ranks
     if Player.sum(:rank) == 0
-      winner.update_attributes :rank => 1, :inactive => false
-      loser.update_attributes :rank => 2, :inactive => false
+      winner.update_attributes :rank => 1, :active => true
+      loser.update_attributes :rank => 2, :active => true
       return
     elsif loser.rank.nil?
       return
@@ -33,7 +33,7 @@ class Match < ActiveRecord::Base
       Player.where(['rank < ? AND rank >= ?', winner_rank, new_rank]).order('rank desc').each do |player|
         player.update_attributes :rank => player.rank + 1
       end
-      winner.update_attributes :rank => new_rank, :inactive => false
+      winner.update_attributes :rank => new_rank, :active => true
     end
   end
 
@@ -41,7 +41,7 @@ class Match < ActiveRecord::Base
     cutoff = 30.days.ago
     Player.active.each do |player|
       if player.most_recent_match.nil? || (player.most_recent_match.occured_at < cutoff)
-        player.update_attributes :inactive => true
+        player.update_attributes :active => false
       end
     end
   end

@@ -61,7 +61,7 @@ describe MatchesController do
     let!(:me) { Player.create(name: "me", rank: 1) }
     let!(:you) { Player.create(name: "you", rank: 2) }
     let!(:us) { Player.create(name: "us", rank: nil) }
-    let!(:them) { Player.create(name: "them", rank: 3, inactive: true)}
+    let!(:them) { Player.create(name: "them", rank: 3, active: false)}
     before { get :rankings }
     it { should be_success }
     it { assigns(:rankings).should == [me, you] }

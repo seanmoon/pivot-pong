@@ -55,7 +55,7 @@ describe SaveRankingsToPlayer do
         let!(:m3) { Match.create(winner: p4, loser: p1) }
 
         it "moves the winner halfway to the loser" do
-          Player.update_all :inactive => false
+          Player.update_all :active => true
 
           SaveRankingsToPlayer.run
 

@@ -10,8 +10,8 @@ class Player < ActiveRecord::Base
   validates_uniqueness_of :rank, :allow_nil => true
 
   scope :ranked, where('rank IS NOT NULL').order('rank asc')
-  scope :active, where(:inactive => false)
-  scope :inactive, where(:inactive => true)
+  scope :active, where(:active => true)
+  scope :inactive, where(:active => false)
 
   def display_name
     name.titleize
@@ -21,8 +21,8 @@ class Player < ActiveRecord::Base
     Match.where(['winner_id = ? OR loser_id = ?', id, id]).order('occured_at desc').first
   end
 
-  def active?
-    !inactive?
+  def inactive?
+    !active?
   end
 
   private
