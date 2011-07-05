@@ -74,4 +74,20 @@ describe Player do
       end
     end
   end
+
+  describe ".compress_ranks" do
+    let!(:p1) { Player.create(name: "p1", rank: 1) }
+    let!(:p2) { Player.create(name: "p2", rank: 3) }
+    let!(:p3) { Player.create(name: "p3", rank: 5) }
+    let!(:p4) { Player.create(name: "p4", rank: 9) }
+
+    it "should leave no gaps in the rankings" do
+      Player.compress_ranks
+
+      p1.reload.rank.should == 1
+      p2.reload.rank.should == 2
+      p3.reload.rank.should == 3
+      p4.reload.rank.should == 4
+    end
+  end
 end

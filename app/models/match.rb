@@ -44,5 +44,7 @@ class Match < ActiveRecord::Base
         player.update_attributes :active => false
       end
     end
+
+    Player.compress_ranks
   end
 end

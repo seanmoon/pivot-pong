@@ -25,6 +25,13 @@ class Player < ActiveRecord::Base
     !active?
   end
 
+  def self.compress_ranks
+    active.ranked.each_with_index do |player, index|
+      new_rank = index + 1
+      player.update_attribute(:rank, new_rank) unless new_rank == player.rank
+    end
+  end
+
   private
 
   def downcase_name

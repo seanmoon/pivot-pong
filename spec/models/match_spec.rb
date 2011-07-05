@@ -132,6 +132,21 @@ describe Match do
       Match.create(winner: p2, loser: p3)
       new_player.reload.should be_inactive
     end
+
+    it "should update other rankings around the newly inactive player" do
+      Player.update_all :active => true
+      p4.reload.update_attribute :rank, 1
+      p2.reload.update_attribute :rank, 2
+      p1.reload.update_attribute :rank, 3
+      p3.reload.update_attribute :rank, 4
+
+      Match.create(winner: p4, loser: p3)
+      p4.reload.rank.should == 1
+      p2.reload.rank.should be_nil
+      p2.should be_inactive
+      p1.reload.rank.should == 2
+      p3.reload.rank.should == 3
+    end
   end
 
   describe "reactivating players" do
