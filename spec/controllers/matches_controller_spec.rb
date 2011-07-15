@@ -43,9 +43,13 @@ describe MatchesController do
     let(:occured_at) { Time.now }
     let!(:newer_match) { Match.create(winner: "me", loser: "you", occured_at: occured_at) }
     let!(:older_match) { Match.create(winner: "you", loser: "me", occured_at: occured_at - 1.day) }
+    let!(:two_months_ago_match) { Match.create(winner: "bro1", loser: "bro2", occured_at: occured_at - 2.months) }
+    let!(:ten_months_ago_match) { Match.create(winner: "one", loser: "two", occured_at: occured_at - 10.months) }
     before { get :rankings }
     it { should be_success }
-    it { assigns(:rankings).should == ["Me", "You"] }
+    it { assigns(:rankings).should == ["One", "Two", "Bro1", "Bro2", "Me", "You"] }
+    it { assigns(:last_90_days_rankings).should == ["Bro1", "Bro2", "Me", "You"]}
+    it { assigns(:last_30_days_rankings).should == ["Me", "You"]}
   end
 
   describe "GET #players" do
