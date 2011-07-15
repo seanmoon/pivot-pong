@@ -34,13 +34,13 @@ describe MatchesHelper do
       end
       it { should == ["P1", "P4", "P2", "P3"] }
     end
-    
+
     it "uses case-insensitive comparisons" do
       helper.calculate_rankings([Match.create(winner: "p1", loser: "P2"), Match.create(winner: "P1", loser: "p2")]).should == ["P1", "P2"]
     end
-    
+
     it "titleizes the rankings" do
-      helper.calculate_rankings([Match.create(winner: "joe blow", loser: "jane doe"), Match.create(winner: "joe blow", loser: "spot")]).should == 
+      helper.calculate_rankings([Match.create(winner: "joe blow", loser: "jane doe"), Match.create(winner: "joe blow", loser: "spot")]).should ==
         ["Joe Blow", "Jane Doe", "Spot"]
     end
   end
