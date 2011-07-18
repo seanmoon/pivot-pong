@@ -7,6 +7,7 @@
     = javascript_include_tag 'jquery.autocomplete'
     = javascript_include_tag "http://use.typekit.com/rol0dzy.js"
     = javascript_tag "try{Typekit.load();}catch(e){}"
+    = favicon_link_tag
     = csrf_meta_tag
 
   %body
@@ -15,4 +16,4 @@
         %h1== pivot pong #{location.downcase}
         = render 'shared/flash_messages'
         = yield
-        = link_to "source code", "https://github.com/ssamoon/pivot-pong", class: "source"
+        = link_to "source code", "https://github.com/seanmoon/pivot-pong", class: "source"

@@ -58,13 +58,20 @@ describe MatchesController do
   end
 
   describe "GET #rankings" do
-    let!(:me) { Player.create(name: "me", rank: 1) }
-    let!(:you) { Player.create(name: "you", rank: 2) }
+    let!(:me) { Player.create(name: "me") }
+    let!(:you) { Player.create(name: "you") }
     let!(:us) { Player.create(name: "us", rank: nil) }
     let!(:them) { Player.create(name: "them", rank: 3, active: false)}
+    let(:occurred_at) { Time.now }
+    let!(:older_match) { Match.create(winner: you, loser: me, occured_at: occurred_at - 1.day) }
+    let!(:newer_match) { Match.create(winner: me, loser: you, occured_at: occurred_at) }
+    let!(:ten_months_ago_match) { Match.create(winner: Player.create(name: "one"), loser: Player.create(name: "two"), occured_at: occurred_at - 10.months) }
+    let!(:two_months_ago_match) { Match.create(winner: Player.create(name: "bro1"), loser: Player.create(name: "bro2"), occured_at: occurred_at - 2.months) }
     before { get :rankings }
     it { should be_success }
     it { assigns(:rankings).should == [me, you] }
+    it { assigns(:last_90_days_rankings).should == ["Bro1", "Bro2", "Me", "You"]}
+    it { assigns(:last_30_days_rankings).should == ["Me", "You"]}
   end
 
   describe "GET #players" do
