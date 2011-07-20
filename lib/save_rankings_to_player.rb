@@ -21,7 +21,7 @@ class SaveRankingsToPlayer
     end
 
     ranking.each_with_index do |player, index|
-      player.update_attributes :rank => index + 1
+      player.update_attributes :rank => index + 1, :active => true
     end
   end
 end
