@@ -29,6 +29,7 @@ describe SaveRankingsToPlayer do
       let!(:m1) { Match.create(winner: p1, loser: p2) }
 
       it "assigns ranks for players in the match" do
+        Player.update_all(:active => false)
         SaveRankingsToPlayer.run
 
         p1.reload.rank.should == 1
@@ -41,6 +42,7 @@ describe SaveRankingsToPlayer do
         let!(:m2) { Match.create(winner: p2, loser: p1) }
 
         it "sorts winners" do
+          Player.update_all(:active => false)
           SaveRankingsToPlayer.run
 
           p1.reload.rank.should == 2
