@@ -4,3 +4,4 @@
 tmp/
 log/
 *.sqlite3
+.idea/

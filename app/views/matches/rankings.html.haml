@@ -6,7 +6,7 @@
 %h1 All time
 %ol.rankings
   - @rankings.each do |player|
-    %li{class: cycle("even", "odd")}= player
+    %li{class: cycle("even", "odd")}= player.display_name
 
 %h1 Last 30 days
 %ol.rankings
