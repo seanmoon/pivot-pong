@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 %html
   %head
-    %title== Pivot Pong - #{location}
+    %title Pivot Pong - #{location}
     = stylesheet_link_tag 'reset', 'pong', 'jquery.autocomplete'
     = javascript_include_tag :defaults
     = javascript_include_tag 'jquery.autocomplete'
@@ -13,7 +13,7 @@
   %body
     #page
       #content
-        %h1== pivot pong #{location.downcase}
+        %h1 pivot pong #{location.downcase}
         = render 'shared/flash_messages'
         = yield
         = link_to "source code", "https://github.com/seanmoon/pivot-pong", class: "source"
