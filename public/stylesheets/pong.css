@@ -2,12 +2,12 @@ body {
   font-family: "coolvetica-1", "coolvetica-2", Helvetica, Arial, sans-serif;
 }
 
-body h1, body h3 {
+h1, h3 {
   font-size: 36px;
   margin: 10px 0;
 }
 
-body a {
+a {
   text-decoration: none;
   color: #cc5500;
 }
@@ -17,53 +17,53 @@ nav a {
   margin-top: 20px;
 }
 
-body ol {
+ol {
   font-size: 48px;
   margin: 20px auto;
   width: 550px;
 }
 
-body li {
+li {
   padding: 5px 25px;
   width: 500px;
   list-style-position: inside;
 }
 
-body li, body td {
+li, td {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-body table {
+table {
   table-layout: fixed;
   margin: 10px 0px;
   width: 550px;
 }
 
-body tr {
+tr {
   height: 20px;
 }
 
-body th, body td {
+th, td {
   padding: 2px 5px;
   vertical-align: middle;
 }
 
-body th {
+th {
   background-color: #333;
   color: white;
   overflow: hidden;
 }
 
-body td {
+td {
   width: 200px;
 }
 
-body form {
+form {
   margin: 10px 0;
 }
 
-body input[type='text'] {
+input[type='text'] {
   font-size: 24px;
   display: block;
   width: 100%;
