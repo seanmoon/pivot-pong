@@ -2,7 +2,7 @@ body {
   font-family: "coolvetica-1", "coolvetica-2", Helvetica, Arial, sans-serif;
 }
 
-body h1 {
+body h1, body h3 {
   font-size: 36px;
   margin: 10px 0;
 }
