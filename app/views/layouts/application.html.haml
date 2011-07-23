@@ -11,9 +11,8 @@
     = csrf_meta_tag
 
   %body
-    #page
-      #content
-        %h1 pivot pong #{location.downcase}
-        = render 'shared/flash_messages'
-        = yield
-        = link_to "source code", "https://github.com/seanmoon/pivot-pong", class: "source"
+    #content
+      %h1 pivot pong #{location.downcase}
+      = render 'shared/flash_messages'
+      = yield
+      = link_to "source code", "https://github.com/seanmoon/pivot-pong", class: "source"

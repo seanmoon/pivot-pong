@@ -2,6 +2,13 @@ body {
   font-family: "coolvetica-1", "coolvetica-2", Helvetica, Arial, sans-serif;
 }
 
+body > * {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 h1, h3 {
   font-size: 36px;
   margin: 10px 0;
@@ -19,8 +26,8 @@ nav a {
 
 ol {
   font-size: 48px;
-  margin: 20px auto;
-  width: 550px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 li {
@@ -80,15 +87,12 @@ td.action, th.action {
   text-align: center;
 }
 
-#page {
+#content {
   margin-left: auto;
   margin-right: auto;
   border-left: 1px solid #999;
   border-right: 1px solid #999;
   width: 600px;
-}
-
-#content {
   padding: 25px;
   background-color: #DEDEDE;
 }
