@@ -16,7 +16,7 @@ h1, h3 {
 
 a {
   text-decoration: none;
-  color: #cc5500;
+  color: #c50;
 }
 
 nav a {
@@ -94,15 +94,15 @@ td.action, th.action {
   border-right: 1px solid #999;
   width: 600px;
   padding: 25px;
-  background-color: #DEDEDE;
+  background-color: #dedede;
 }
 
 .even {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .odd {
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
 }
 
 a.source {
