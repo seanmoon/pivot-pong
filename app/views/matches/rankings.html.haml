@@ -1,24 +1,27 @@
 - content_for :title, "Rankings"
 
-%h2 Rankings
-
 %nav
+  = link_to "Rankings", root_path, class: "current"
   = link_to "Matches", matches_path
 
-%h3 All time
-%ol.rankings
-  - @rankings.each do |player|
-    %li{class: cycle("even", "odd")}= player.display_name
+.tabs
+  %ul.tab-bar
+    %li= link_to "All time", "#all-time"
+    %li= link_to "Last 30 days", "#30-days"
+    %li= link_to "Last 90 days", "#90-days"
 
-%h3 Last 30 days
-%ol.rankings
-  - @last_30_days_rankings.each do |player|
-    %li{class: cycle("even", "odd")}= player
+  %ol#all-time.rankings
+    - @rankings.each do |player|
+      %li{class: cycle("even", "odd")}= player.display_name
 
-%h3 Last 90 days
-%ol.rankings
-  - @last_90_days_rankings.each do |player|
-    %li{class: cycle("even", "odd")}= player
+  - reset_cycle
 
-%nav
-  = link_to "Matches", matches_path
+  %ol#30-days.rankings
+    - @last_30_days_rankings.each do |player|
+      %li{class: cycle("even", "odd")}= player
+
+  - reset_cycle
+
+  %ol#90-days.rankings
+    - @last_90_days_rankings.each do |player|
+      %li{class: cycle("even", "odd")}= player

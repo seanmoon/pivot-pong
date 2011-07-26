@@ -19,6 +19,13 @@ a {
   color: #c50;
 }
 
+a.current {
+  color: #eee;
+  background-color: #c50;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 footer {
   font-size: 12px;
 }
@@ -29,7 +36,7 @@ footer a {
 
 ol {
   font-size: 48px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -106,6 +113,18 @@ td.action, th.action {
 
 .odd {
   background-color: #e7e7e7;
+}
+
+.tabs {
+  margin-top: 20px;
+}
+
+.tab-bar {
+  list-style-type: none;
+}
+
+.tab-bar li {
+  display: inline;
 }
 
 .flash {
