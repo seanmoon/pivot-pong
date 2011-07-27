@@ -26,6 +26,23 @@ a.current {
   padding-right: 3px;
 }
 
+header {
+  margin-bottom: 20px;
+}
+
+header > * {
+  display: inline;
+}
+
+header nav {
+  margin-left: 10px;
+  vertical-align: 4px;
+}
+
+header nav a + a {
+  margin-left: 10px;
+}
+
 footer {
   font-size: 12px;
 }

@@ -12,7 +12,12 @@
 
   %body
     #page
-      %h1 pivot pong #{location.downcase}
+      %header
+        %h1 pivot pong #{location.downcase}
+        %nav
+          = link_to_with_current "Rankings", root_path
+          = link_to_with_current "Matches", matches_path
+
       = render 'shared/flash_messages'
       = yield
       %footer

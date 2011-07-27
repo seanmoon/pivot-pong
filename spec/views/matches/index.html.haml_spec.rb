@@ -11,6 +11,5 @@ describe "matches/index.html.haml" do
   it { should include("Cl") }
   it { should include("Minzy") }
   it { should include(occured_at.strftime("%Y-%m-%d")) }
-  it { should include(link_to "Rankings", "/") }
   it { should include(link_to "delete", match_path(match), method: :delete) }
 end
