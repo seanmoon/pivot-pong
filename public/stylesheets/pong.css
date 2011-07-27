@@ -2,68 +2,102 @@ body {
   font-family: "coolvetica-1", "coolvetica-2", Helvetica, Arial, sans-serif;
 }
 
-body h1 {
+body > * {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1, h3 {
   font-size: 36px;
   margin: 10px 0;
 }
 
-body a {
+a {
   text-decoration: none;
-  color: #cc5500;
+  color: #c50;
 }
 
-nav a {
-  display: block;
-  margin-top: 20px;
+a.current {
+  color: #eee;
+  background-color: #c50;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
-body ol {
+header {
+  margin-bottom: 20px;
+}
+
+header > * {
+  display: inline;
+}
+
+header nav {
+  margin-left: 10px;
+  vertical-align: 4px;
+}
+
+header nav a + a {
+  margin-left: 10px;
+}
+
+footer {
+  font-size: 12px;
+}
+
+footer a {
+  float: right;
+}
+
+ol {
   font-size: 48px;
-  margin: 20px auto;
-  width: 550px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-body li {
+li {
   padding: 5px 25px;
   width: 500px;
   list-style-position: inside;
 }
 
-body li, body td {
+li, td {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-body table {
+table {
   table-layout: fixed;
   margin: 10px 0px;
   width: 550px;
 }
 
-body tr {
+tr {
   height: 20px;
 }
 
-body th, body td {
+th, td {
   padding: 2px 5px;
   vertical-align: middle;
 }
 
-body th {
+th {
   background-color: #333;
   color: white;
   overflow: hidden;
 }
 
-body td {
+td {
   width: 200px;
 }
 
-body form {
+form {
   margin: 10px 0;
 }
 
-body input[type='text'] {
+input[type='text'] {
   font-size: 24px;
   display: block;
   width: 100%;
@@ -86,24 +120,28 @@ td.action, th.action {
   border-left: 1px solid #999;
   border-right: 1px solid #999;
   width: 600px;
-}
-
-#content {
   padding: 25px;
-  background-color: #DEDEDE;
+  background-color: #dedede;
 }
 
 .even {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .odd {
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
 }
 
-a.source {
-  font-size: 12px;
-  float: right;
+.tabs {
+  margin-top: 20px;
+}
+
+.tab-bar {
+  list-style-type: none;
+}
+
+.tab-bar li {
+  display: inline;
 }
 
 .flash {

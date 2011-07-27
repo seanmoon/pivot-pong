@@ -15,5 +15,4 @@ describe "matches/rankings.html.haml" do
   it { should include("two") }
   it { should include("meow") }
   it { should include("woof") }
-  it { should include(link_to "Matches", matches_path) }
 end

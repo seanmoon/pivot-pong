@@ -1,7 +1,4 @@
-%h2 Add a match
-
-%nav
-  = link_to "Rankings", root_path
+- content_for :title, "Matches"
 
 = form_for(@match) do |f|
   = label_tag :winner_name
@@ -26,7 +23,3 @@
       %td= m.winner.display_name
       %td= m.loser.display_name
       %td.action= link_to "delete", match_path(m), method: :delete
-
-
-%nav
-  = link_to "Rankings", root_path
