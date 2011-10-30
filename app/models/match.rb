@@ -25,7 +25,7 @@ class Match < ActiveRecord::Base
     elsif loser.rank.nil?
       return
     end
-    
+
     winner_rank = winner.rank || Player.maximum(:rank) + 1
     if winner_rank > loser.rank
       new_rank = (winner_rank + loser.rank) / 2

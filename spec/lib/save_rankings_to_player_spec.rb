@@ -10,7 +10,7 @@ describe SaveRankingsToPlayer do
     context "when no matches exist" do
       it "doesn't assign ranks" do
         SaveRankingsToPlayer.run
-        
+
         p1.rank.should be_nil
         p2.rank.should be_nil
         p3.rank.should be_nil
