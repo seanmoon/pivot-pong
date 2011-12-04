@@ -4,16 +4,16 @@ class MatchesController < ApplicationController
   include MatchesHelper
 
   def create
-    params[:match] ||= {}
-    params[:match][:winner] = Player.find_or_create_by_name(params[:winner_name].strip.downcase)
-    params[:match][:loser] = Player.find_or_create_by_name(params[:loser_name].strip.downcase)
+    winner, loser = params.values_at(:winner_name, :loser_name).map { |name|
+      Player.find_or_create_by_name name.strip.downcase
+    }
 
-    if params[:match][:winner].valid? &&params[:match][:loser].valid?
-      match = Match.new(params[:match])
-      match.save
-    else
+    match = Match.new winner: winner, loser: loser
+
+    unless [winner, loser].all?(&:valid?) && match.save
       flash.alert = "Must specify a winner and a loser to post a match."
     end
+
     redirect_to matches_path
   end
 
