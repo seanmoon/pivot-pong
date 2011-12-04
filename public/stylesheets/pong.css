@@ -132,18 +132,6 @@ td.action, th.action {
   background-color: #e7e7e7;
 }
 
-.tabs {
-  margin-top: 20px;
-}
-
-.tab-bar {
-  list-style-type: none;
-}
-
-.tab-bar li {
-  display: inline;
-}
-
 .flash {
   margin-bottom: 10px;
 }
@@ -154,4 +142,8 @@ td.action, th.action {
 
 .flash .notice {
   color: green;
+}
+
+ol.rankings > li > span {
+  font-size: 25px;
 }
