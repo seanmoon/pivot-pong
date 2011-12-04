@@ -40,7 +40,7 @@ describe MatchesHelper do
       end
       it { should == ["P1", "P4", "P2", "P3"] }
     end
-    
+
     it "titleizes the rankings" do
       joe = Player.create(name: 'joe blow', rank: 1)
       jane = Player.create(name: 'jane doe', rank: 2)
