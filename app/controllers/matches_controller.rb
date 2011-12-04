@@ -5,8 +5,8 @@ class MatchesController < ApplicationController
 
   def create
     params[:match] ||= {}
-    params[:match][:winner] = Player.find_or_create_by_name(params[:winner_name].downcase)
-    params[:match][:loser] = Player.find_or_create_by_name(params[:loser_name].downcase)
+    params[:match][:winner] = Player.find_or_create_by_name(params[:winner_name].strip.downcase)
+    params[:match][:loser] = Player.find_or_create_by_name(params[:loser_name].strip.downcase)
 
     if params[:match][:winner].valid? &&params[:match][:loser].valid?
       match = Match.new(params[:match])

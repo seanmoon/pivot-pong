@@ -42,6 +42,19 @@ describe MatchesController do
       expect { post :create, {winner_name: "", loser_name: ""} }.to_not change(Match, :count)
 
     end
+
+    context "when the winner name includes extra whitespace" do
+      before { post :create, params }
+
+      let(:params) { {winner_name: "Winner McWinnerson   ", loser_name: "Loser O'Loserly   " } }
+      let(:winner) { Player.find_by_name "winner mcwinnerson" }
+      let(:loser) { Player.find_by_name "loser o'loserly" }
+
+      it "strips whitespace from player names" do
+        winner.should be
+        loser.should be
+      end
+    end
   end
 
   describe "DELETE #destroy" do
