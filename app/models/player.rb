@@ -1,8 +1,7 @@
 class Player < ActiveRecord::Base
-  before_validation :downcase_name
+  before_validation :downcase_name, :if => ->{ name.present? }
 
-  validates :name, presence: true
-  validates_uniqueness_of :name
+  validates :name, presence: true, uniqueness: true
 
   def display_name
     name.split("'").map(&:titleize).join("'")
@@ -11,6 +10,6 @@ class Player < ActiveRecord::Base
   private
 
   def downcase_name
-    self.name = self.name.downcase if self.name
+    self.name = self.name.downcase
   end
 end
