@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
   scope :inactive, where(:active => false)
 
   def display_name
-    name.titleize
+    name.split("'").map(&:titleize).join("'")
   end
 
   def most_recent_match

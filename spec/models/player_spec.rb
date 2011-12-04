@@ -36,6 +36,13 @@ describe Player do
   describe '#display_name' do
     subject { Player.create(name: 'scooby doo') }
     its(:display_name) { should == 'Scooby Doo' }
+
+    context "players with Irish names" do
+      subject { player.display_name }
+
+      let(:player) { Player.new name: "sam o'neill" }
+      it { should == "Sam O'Neill" }
+    end
   end
 
   describe "ranked" do
