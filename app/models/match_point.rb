@@ -10,7 +10,7 @@ class MatchPoint
     (163..187) => { expected: 2, upset: 35 },
     (188..212) => { expected: 1, upset: 40 },
     (213..237) => { expected: 1, upset: 45 },
-    (238..1000000) => { expected: 0, upset: 50 }
+    (238..1500) => { expected: 0, upset: 50 }
   }
 
   class << self
