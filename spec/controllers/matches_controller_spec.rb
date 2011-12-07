@@ -4,12 +4,13 @@ describe MatchesController do
   subject { response }
 
   describe "GET #index" do
-    let(:occured_at) { Time.now }
-    let(:me) { Player.create(name: "me", rank: 1 ) }
-    let(:you) { Player.create(name: "you", rank: 2 ) }
-    let!(:newer_match) { Match.create(winner: me, loser: you, occured_at: occured_at) }
-    let!(:older_match) { Match.create(winner: you, loser: me, occured_at: occured_at - 1.day) }
+    let(:me) { Player.create(name: "me") }
+    let(:you) { Player.create(name: "you") }
+    let!(:newer_match) { Match.create(winner: me, loser: you) }
+    let!(:older_match) { Match.create(winner: you, loser: me, occured_at: 1.day.ago) }
+
     before { get :index }
+
     it { should be_success }
     it { assigns(:matches).should == Match.order("occured_at desc") }
     it { assigns(:match).should be }
@@ -42,6 +43,19 @@ describe MatchesController do
       expect { post :create, {winner_name: "", loser_name: ""} }.to_not change(Match, :count)
 
     end
+
+    context "when the winner name includes extra whitespace" do
+      before { post :create, params }
+
+      let(:params) { {winner_name: "Winner McWinnerson   ", loser_name: "Loser O'Loserly   " } }
+      let(:winner) { Player.find_by_name "winner mcwinnerson" }
+      let(:loser) { Player.find_by_name "loser o'loserly" }
+
+      it "strips whitespace from player names" do
+        winner.should be
+        loser.should be
+      end
+    end
   end
 
   describe "DELETE #destroy" do
@@ -58,26 +72,27 @@ describe MatchesController do
   end
 
   describe "GET #rankings" do
-    let!(:me) { Player.create(name: "me") }
-    let!(:you) { Player.create(name: "you") }
-    let!(:us) { Player.create(name: "us", rank: nil) }
-    let!(:them) { Player.create(name: "them", rank: 3, active: false)}
-    let(:occurred_at) { Time.now }
-    let!(:older_match) { Match.create(winner: you, loser: me, occured_at: occurred_at - 1.day) }
-    let!(:newer_match) { Match.create(winner: me, loser: you, occured_at: occurred_at) }
-    let!(:ten_months_ago_match) { Match.create(winner: Player.create(name: "one"), loser: Player.create(name: "two"), occured_at: occurred_at - 10.months) }
-    let!(:two_months_ago_match) { Match.create(winner: Player.create(name: "bro1"), loser: Player.create(name: "bro2"), occured_at: occurred_at - 2.months) }
+    let(:player_1) { Player.create name: "player1" }
+    let(:player_2) { Player.create name: "player2" }
+    let(:player_3) { Player.create name: "player3" }
+
+    let(:players) {  }
+
+    before do
+      [player_1, player_2, player_3].combination(2).each { |winner, loser|
+        Match.create winner: winner, loser: loser
+      }
+    end
+
     before { get :rankings }
     it { should be_success }
-    it { assigns(:rankings).should == [me, you] }
-    it { assigns(:last_90_days_rankings).should == ["Bro1", "Bro2", "Me", "You"]}
-    it { assigns(:last_30_days_rankings).should == ["Me", "You"]}
+    it { assigns(:rankings).should == MatchPoint.rankings }
   end
 
   describe "GET #players" do
     before do
-      @match1 = Match.create(winner: Player.create(name: "danny burkes", rank: 1), loser: Player.create(name: "edward hieatt", rank: 2))
-      @match2 = Match.create(winner: Player.create(name: "davis frank", rank: 3), loser: Player.create(name: "parker thompson", rank: 4))
+      @match1 = Match.create(winner: Player.create(name: "danny burkes"), loser: Player.create(name: "edward hieatt"))
+      @match2 = Match.create(winner: Player.create(name: "davis frank"), loser: Player.create(name: "parker thompson"))
     end
 
     it "renders a sorted, titleized list of player names" do
