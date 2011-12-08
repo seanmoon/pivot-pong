@@ -1,23 +1,7 @@
 - content_for :title, "Rankings"
 
-.tabs
-  %ul.tab-bar
-    %li= link_to "All time", "#all-time"
-    %li= link_to "Last 30 days", "#30-days"
-    %li= link_to "Last 90 days", "#90-days"
-
-  %ol#all-time.rankings
-    - @rankings.each do |player|
-      %li{class: cycle("even", "odd")}= player.display_name
-
-  - reset_cycle
-
-  %ol#30-days.rankings
-    - @last_30_days_rankings.each do |player|
-      %li{class: cycle("even", "odd")}= player
-
-  - reset_cycle
-
-  %ol#90-days.rankings
-    - @last_90_days_rankings.each do |player|
-      %li{class: cycle("even", "odd")}= player
+%ol#all-time.rankings
+  - @rankings.each do |player, points|
+    %li{class: cycle("even", "odd")}
+      = "#{player.display_name}"
+      %span= "#{points} pts"
