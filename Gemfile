@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'rake', '< 0.9'
-gem 'rails'
+gem 'rake'
+gem 'rails', "~> 3.0.0"
 gem 'haml-rails'
 gem 'heroku'
 gem 'jquery-rails'
 
 group :test, :development do
   gem 'sqlite3'
-  gem 'rspec-rails', '~> 2.4'
+  gem 'rspec-rails'
 end
 
 group :production do
